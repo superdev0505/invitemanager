@@ -14,6 +14,12 @@ class DataHeadServer(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        if self.path == '/index.js':
+            print(self.path)
+            file_to_open = open(self.path[1:]).read()
+            self._set_response(200)
+            self.wfile.write(bytes(file_to_open, 'utf-8'))
+            return
         if self.path == '/':
             self.path = '/index.html'
         try:
